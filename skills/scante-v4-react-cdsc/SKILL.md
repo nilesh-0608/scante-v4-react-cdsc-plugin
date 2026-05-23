@@ -1,6 +1,6 @@
 ---
-name: react-mw1-module
-description: Use when the user asks to create, scaffold, generate, or bootstrap a new react-mw1 CDSC module, a new scanteIframeSdk module, a new tenant module under react-mw1/cdsc/, or mentions phrases like "new react-mw1 module", "scaffold a CDSC module", "create scante iframe module", or "/new-react-mw1-module". Produces a complete React 18 + TypeScript + CRA project wired to window.scanteIframeSdk with mandatory Antd v5 + @ant-design/icons + Tailwind styling.
+name: scante-v4-react-cdsc
+description: Use when the user asks to create, scaffold, generate, or bootstrap a new react-mw1 CDSC module, a new scanteIframeSdk module, a new tenant module under react-mw1/cdsc/, or mentions phrases like "new react-mw1 module", "scaffold a CDSC module", "create scante iframe module", or "/scante-v4-react-cdsc". Produces a complete React 18 + TypeScript + CRA project wired to window.scanteIframeSdk with mandatory Antd v5 + @ant-design/icons + Tailwind styling.
 version: 1.0.0
 ---
 
@@ -67,4 +67,4 @@ Summary of what you must do (the spec is authoritative — defer to it on any co
 
 ## 4. If the user invokes the slash command
 
-The `/new-react-mw1-module` slash command (also shipped with this plugin) loads the same instructions. This skill is the autonomous-trigger entrypoint; the slash command is the explicit-trigger entrypoint. Both delegate to the published spec URL.
+The `/scante-v4-react-cdsc` slash command (also shipped with this plugin) loads the same instructions. This skill is the autonomous-trigger entrypoint; the slash command is the explicit-trigger entrypoint. Both delegate to the published spec URL.

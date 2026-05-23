@@ -1,5 +1,5 @@
 {
-  "name": "react-mw1-module",
+  "name": "scante-v4-react-cdsc",
   "owner": {
     "name": "Scante",
     "email": "engineering@scante.net",
@@ -7,9 +7,9 @@
   },
   "plugins": [
     {
-      "name": "react-mw1-module",
+      "name": "scante-v4-react-cdsc",
       "source": ".",
-      "description": "Scaffold a new react-mw1 CDSC module (CRA + TypeScript + Antd v5 + Tailwind + @ant-design/icons) wired to window.scanteIframeSdk. Self-contained.",
+      "description": "Scaffold a new Scante v4 React CDSC module (CRA + TypeScript + Antd v5 + Tailwind + @ant-design/icons) wired to window.scanteIframeSdk. Self-contained.",
       "version": "1.0.0",
       "keywords": ["scante", "react", "cdsc", "scaffolding", "antd", "tailwind"]
     }

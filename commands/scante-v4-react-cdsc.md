@@ -1,5 +1,5 @@
 ---
-name: new-react-mw1-module
+name: scante-v4-react-cdsc
 description: Scaffold a new react-mw1 CDSC module from the canonical spec (Antd + Tailwind + Icons + scanteIframeSdk)
 ---
 

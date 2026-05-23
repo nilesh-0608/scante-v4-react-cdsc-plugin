@@ -1,4 +1,4 @@
-# react-mw1-module — Claude Code Plugin
+# scante-v4-react-cdsc — Claude Code Plugin
 
 Scaffold a new **react-mw1 CDSC** module with a single command. Generates a complete React 18 + TypeScript + CRA project wired to `window.scanteIframeSdk`, styled with **Ant Design v5** + **`@ant-design/icons`** + **Tailwind CSS**.
 
@@ -14,7 +14,7 @@ From inside Claude Code:
 
 ```
 /plugin marketplace add nilesh-0608/scante-v4-react-cdsc-plugin
-/plugin install react-mw1-module@react-mw1-module
+/plugin install scante-v4-react-cdsc@scante-v4-react-cdsc
 ```
 
 
@@ -23,7 +23,7 @@ From inside Claude Code:
 **Explicit (slash command):**
 
 ```
-/new-react-mw1-module
+/scante-v4-react-cdsc
 ```
 
 Claude will:
