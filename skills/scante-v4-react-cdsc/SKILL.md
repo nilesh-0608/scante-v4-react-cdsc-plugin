@@ -75,6 +75,17 @@ Summary of what you must do (the spec is authoritative — defer to it on any co
      cd <moduleName> && npm start
      ```
 
+## 2a. Docker / compose files — DO NOT touch
+
+The repo's Docker setup is fully generic and **requires zero changes per new module**:
+
+- `Dockerfile` (repo root) — copies `package*.json` from `${PROJECT_PATH}`, runs `npm install`, exposes port 3000. Generic.
+- `docker-compose.yml` (repo root) — uses `${PROJECT_PATH}` env var for build context AND volume mount (`${PROJECT_PATH}:/app`).
+- `docker-compose-html.yml` — same idea, for HTML/Alpine modules.
+- `run-app.sh` — accepts the module path as `$1`, sets `PROJECT_PATH=$(realpath "$1")`, then runs `docker compose up` (React) or `docker compose -f docker-compose-html.yml up` (HTML), auto-detected by presence of `package.json`.
+
+**Do not edit `Dockerfile`, `docker-compose*.yml`, `run-app.sh`, or `nginx/*` when scaffolding a module.** The new module's own `package.json` (generated from Appendix A) is all the docker stack needs. If a generated module's `npm install` fails inside the container, fix the module's `package.json`, not the docker files.
+
 ## 3. Hard rules
 
 - Never `import` `scanteIframeSdk`; it's runtime-injected on `window`.

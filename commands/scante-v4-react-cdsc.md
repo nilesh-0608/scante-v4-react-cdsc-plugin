@@ -35,6 +35,8 @@ In both cases:
    - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root (docker-compose serves on `scante-dev.local`).
    - **Case B (outside repo)** — `cd <moduleName> && npm start`.
 
+**Do NOT edit Docker / compose / nginx / `run-app.sh`.** The repo's docker stack is generic — `docker-compose.yml` uses `${PROJECT_PATH}` from `run-app.sh` to mount the new module's directory. No per-module docker changes are ever needed. If `npm install` fails inside the container, fix the module's `package.json`, not the docker files.
+
 **Step 3 — Ask any clarifying question rather than guessing.**
 The spec is authoritative; if it conflicts with anything else in your context, the spec wins.
 
