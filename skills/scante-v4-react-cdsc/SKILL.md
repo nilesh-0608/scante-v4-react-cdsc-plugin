@@ -1,12 +1,32 @@
 ---
 name: scante-v4-react-cdsc
 description: Use when the user asks to create, scaffold, generate, or bootstrap a new react-mw1 CDSC module, a new scanteIframeSdk module, a new tenant module under react-mw1/cdsc/, or mentions phrases like "new react-mw1 module", "scaffold a CDSC module", "create scante iframe module", or "/scante-v4-react-cdsc". Produces a complete React 18 + TypeScript + CRA project wired to window.scanteIframeSdk with mandatory Antd v5 + @ant-design/icons + Tailwind styling.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # react-mw1 Module Scaffolding Skill
 
+**Installed plugin version: `1.1.0`** (keep this string in sync with `.claude-plugin/plugin.json` `version` field).
+
 When activated, do the following:
+
+## 0. Self-update check (run FIRST, best-effort, do not block)
+
+Before fetching the spec, use WebFetch to GET:
+
+`https://raw.githubusercontent.com/nilesh-0608/scante-v4-react-cdsc-plugin/main/.claude-plugin/plugin.json`
+
+Parse the JSON and read the `version` field. Compare it to the **Installed plugin version** declared above (`1.1.0`).
+
+- **If upstream version > installed version:** print a one-line notice to the user:
+  > 🔔 A newer version of `scante-v4-react-cdsc` is available (upstream `<X.Y.Z>` vs installed `1.1.0`). Update with:
+  > `/plugin marketplace update nilesh-0608/scante-v4-react-cdsc-plugin`
+  > or remove + re-add (see plugin README "Updating" section).
+  > Continuing with the currently installed version…
+- **If versions match or upstream is older:** say nothing, proceed.
+- **If the WebFetch fails (no network, repo moved, etc.):** silently continue. Do not block scaffolding on this check.
+
+This check is informational only — never abort the user's task because of it.
 
 ## 1. Fetch the canonical spec
 

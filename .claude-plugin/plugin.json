@@ -1,6 +1,6 @@
 {
   "name": "scante-v4-react-cdsc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Scaffold a new Scante v4 React CDSC module (React 18 + TypeScript + Antd v5 + Tailwind + @ant-design/icons) wired to window.scanteIframeSdk. Reads the canonical spec from scante-prod.bitbucket.io and asks for inputs.",
   "author": {
     "name": "Scante Engineering",
