@@ -47,7 +47,35 @@ Claude will:
 
 ## Updating
 
-The spec is the source of truth. Updates to the published URL automatically apply to new scaffolds — no plugin update required for non-structural changes. Bump `plugin.json` `version` only when this plugin's command / skill behavior itself changes.
+There are two kinds of updates:
+
+### 1. Spec updates (most updates)
+
+The canonical spec lives at
+<https://scante-prod.bitbucket.io/sdk-doc/docs/superpowers/react-mw1-module-generation>
+and is fetched fresh every time the plugin runs. Any change there applies to new scaffolds **immediately** — no plugin reinstall needed.
+
+### 2. Plugin updates (command / skill / marketplace changes)
+
+When this plugin's `command`, `skill`, or `marketplace.json` itself changes, you have two options to pull the new version into Claude Code:
+
+**Option A — Enable auto-update (recommended):**
+```
+/plugin marketplace update nilesh-0608/scante-v4-react-cdsc-plugin
+```
+Or turn on automatic marketplace refresh in your Claude Code settings so the plugin pulls latest on each new session.
+
+**Option B — Remove and re-add:**
+```
+/plugin uninstall scante-v4-react-cdsc
+/plugin marketplace remove scante-v4-react-cdsc
+/plugin marketplace add nilesh-0608/scante-v4-react-cdsc-plugin
+/plugin install scante-v4-react-cdsc@scante-v4-react-cdsc
+```
+
+This forces a clean reinstall from the latest commit on `main`.
+
+Plugin maintainers: bump `plugin.json` `version` whenever you change command / skill behavior so users on Option A see a clear version bump.
 
 ## License
 
