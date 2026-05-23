@@ -65,16 +65,19 @@ Summary of what you must do (the spec is authoritative — defer to it on any co
 8. **Build + verify**: `cd` into the new module, run `npm install && npm run build`. On failure, fix and re-run; do not stop on first error.
 9. **Report + how to run**:
    - List created files (paths relative to cwd) and confirm build succeeded.
-   - **Inside the repo (Case A)** — instruct the user to run the module via the repo's helper script from the repo root:
+   - **Inside the repo (Case A)** — instruct the user to run the module via the repo's helper from the repo root:
      ```bash
      ./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>
      ```
-     This spins up the React dev container via `docker compose up`. **Tell the user to open** `https://scante-dev.local` (or `http://scante-dev.local`) in the browser once the container is ready. Prerequisite: `/etc/hosts` must contain `127.0.0.1 scante-dev.local` (the repo already includes the local SSL cert under `certbot/` / `nginx/`). Do **not** instruct `npm start` in this case.
-   - **Outside the repo (Case B)** — instruct the user to run locally with:
-     ```bash
-     cd <moduleName> && npm start
-     ```
-     Then open `http://localhost:3000`.
+     This starts the React dev container behind nginx with TLS. Then walk the user through the **mandatory HTTPS flow** (the module will NOT work over `http://localhost` because `window.scanteIframeSdk` is only injected inside the real Scante app shell):
+
+     1. Confirm `/etc/hosts` contains `127.0.0.1 scante-dev.local`.
+     2. Open **`https://scante-dev.local`** in the browser. The local cert is self-signed — accept the browser safety warning ("Advanced → Proceed to scante-dev.local"). Do this once per browser profile.
+     3. Open the **Scante app** (the parent product) in the same browser.
+     4. In the Scante app, open DevTools → Elements (inspect element) and locate the iframe that hosts the CDSC module. Edit its `src` attribute to point to the local module URL served from `https://scante-dev.local/...` (path matches the module folder). The iframe will reload, the SDK will inject `window.scanteIframeSdk`, and the module renders with live data.
+
+     Do **not** suggest `npm start` or `http://localhost:3000` — they bypass nginx/TLS and the SDK never gets injected.
+   - **Outside the repo (Case B)** — there is no nginx/TLS stack here, so `window.scanteIframeSdk` cannot be injected. Warn the user: "This module reads `window.scanteIframeSdk`, which only exists inside the parent Scante app over HTTPS. To run with live data, scaffold this module inside the scantestage.bitbucket.io repo and use `./run-app.sh`. Standalone, you can do markup-only work with `cd <moduleName> && npm start` but every SDK call will be undefined."
 
 ## 2a. Docker / compose files — DO NOT touch
 

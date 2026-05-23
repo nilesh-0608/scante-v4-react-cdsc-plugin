@@ -32,8 +32,8 @@ In both cases:
 6. If `screenSpec` is empty, render the §6a default screen (getUserData / getHeaders panels with Avatar, Descriptions, Tags, icons, Spin loader, Result error state).
 7. Run `npm install && npm run build` inside the new module. Fix and re-run on failure; do not stop on first error.
 8. Report back: list of created files, build status, and **how to run**:
-   - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root, then open **`https://scante-dev.local`** in the browser (requires `127.0.0.1 scante-dev.local` in `/etc/hosts`).
-   - **Case B (outside repo)** — `cd <moduleName> && npm start`, then open **`http://localhost:3000`**.
+   - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root, then follow the HTTPS dev flow: (1) ensure `127.0.0.1 scante-dev.local` in `/etc/hosts`, (2) open `https://scante-dev.local` and accept the self-signed cert warning, (3) open the parent Scante app, (4) DevTools → Elements → find the CDSC iframe and change its `src` to the local module URL on `https://scante-dev.local/...` — the SDK injects on reload. **Do not** suggest `http://localhost:3000`; the SDK is not injected over plain HTTP.
+   - **Case B (outside repo)** — there is no TLS/nginx stack; `window.scanteIframeSdk` will be undefined. Tell the user: real testing requires running inside the scantestage.bitbucket.io repo with `./run-app.sh`. Standalone, `cd <moduleName> && npm start` only works for markup-only UI iteration.
 
 **Docker / compose / nginx / `run-app.sh`:** default = leave alone. The repo's docker stack is generic — `docker-compose.yml` uses `${PROJECT_PATH}` from `run-app.sh` to mount the new module's directory. No per-module docker changes are typically needed. If `npm install` fails inside the container, fix the module's `package.json` first.
 
