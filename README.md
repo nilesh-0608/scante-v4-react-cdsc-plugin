@@ -13,11 +13,10 @@ The spec inlines every required file (Appendix A), so the plugin works whether o
 From inside Claude Code:
 
 ```
-/plugin marketplace add scante-prod/claude-plugin-react-mw1-module
+/plugin marketplace add nilesh-0608/scante-v4-react-cdsc-plugin
 /plugin install react-mw1-module@react-mw1-module
 ```
 
-(Replace `scante-prod/...` with the actual GitHub `owner/repo` once published.)
 
 ## Use
 
