@@ -1,0 +1,14 @@
+{
+  "name": "react-mw1-module",
+  "version": "1.0.0",
+  "description": "Scaffold a new react-mw1 CDSC module (React 18 + TypeScript + Antd v5 + Tailwind + @ant-design/icons) wired to window.scanteIframeSdk. Reads the canonical spec from scante-prod.bitbucket.io and asks for inputs.",
+  "author": {
+    "name": "Scante Engineering",
+    "email": "engineering@scante.net",
+    "url": "https://scante.net"
+  },
+  "homepage": "https://scante-prod.bitbucket.io/sdk-doc/docs/superpowers/react-mw1-module-generation",
+  "repository": "https://bitbucket.org/scante-prod/scante-prod.bitbucket.io",
+  "license": "UNLICENSED",
+  "keywords": ["scante", "react", "cdsc", "scaffolding", "antd", "tailwind", "scanteIframeSdk"]
+}
