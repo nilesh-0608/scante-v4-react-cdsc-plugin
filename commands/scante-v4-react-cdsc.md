@@ -32,8 +32,8 @@ In both cases:
 6. If `screenSpec` is empty, render the §6a default screen (getUserData / getHeaders panels with Avatar, Descriptions, Tags, icons, Spin loader, Result error state).
 7. Run `npm install && npm run build` inside the new module. Fix and re-run on failure; do not stop on first error.
 8. Report back: list of created files, build status, and **how to run**:
-   - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root (docker-compose serves on `scante-dev.local`).
-   - **Case B (outside repo)** — `cd <moduleName> && npm start`.
+   - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root, then open **`https://scante-dev.local`** in the browser (requires `127.0.0.1 scante-dev.local` in `/etc/hosts`).
+   - **Case B (outside repo)** — `cd <moduleName> && npm start`, then open **`http://localhost:3000`**.
 
 **Docker / compose / nginx / `run-app.sh`:** default = leave alone. The repo's docker stack is generic — `docker-compose.yml` uses `${PROJECT_PATH}` from `run-app.sh` to mount the new module's directory. No per-module docker changes are typically needed. If `npm install` fails inside the container, fix the module's `package.json` first.
 

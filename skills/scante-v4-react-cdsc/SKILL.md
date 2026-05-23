@@ -69,11 +69,12 @@ Summary of what you must do (the spec is authoritative — defer to it on any co
      ```bash
      ./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>
      ```
-     This spins up the React dev container via `docker compose up` and serves it on `scante-dev.local`. Do **not** instruct `npm start` in this case.
+     This spins up the React dev container via `docker compose up`. **Tell the user to open** `https://scante-dev.local` (or `http://scante-dev.local`) in the browser once the container is ready. Prerequisite: `/etc/hosts` must contain `127.0.0.1 scante-dev.local` (the repo already includes the local SSL cert under `certbot/` / `nginx/`). Do **not** instruct `npm start` in this case.
    - **Outside the repo (Case B)** — instruct the user to run locally with:
      ```bash
      cd <moduleName> && npm start
      ```
+     Then open `http://localhost:3000`.
 
 ## 2a. Docker / compose files — DO NOT touch
 
