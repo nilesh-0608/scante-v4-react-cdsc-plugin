@@ -84,7 +84,17 @@ The repo's Docker setup is fully generic and **requires zero changes per new mod
 - `docker-compose-html.yml` — same idea, for HTML/Alpine modules.
 - `run-app.sh` — accepts the module path as `$1`, sets `PROJECT_PATH=$(realpath "$1")`, then runs `docker compose up` (React) or `docker compose -f docker-compose-html.yml up` (HTML), auto-detected by presence of `package.json`.
 
-**Do not edit `Dockerfile`, `docker-compose*.yml`, `run-app.sh`, or `nginx/*` when scaffolding a module.** The new module's own `package.json` (generated from Appendix A) is all the docker stack needs. If a generated module's `npm install` fails inside the container, fix the module's `package.json`, not the docker files.
+**Default behavior:** do **not** edit `Dockerfile`, `docker-compose*.yml`, `run-app.sh`, or `nginx/*` when scaffolding. The new module's own `package.json` (generated from Appendix A) is all the docker stack needs. If a generated module's `npm install` fails inside the container, the fix almost always belongs in the module's `package.json`, not the docker files.
+
+**Exception — agent MAY ask the user for permission to edit a docker file** when there is a genuine reason that cannot be solved at the module level. Examples:
+
+- The new module needs a different exposed port (not 3000) — would require a `ports:` change in `docker-compose.yml`.
+- The new module needs an additional service (e.g. Redis, a worker) — would require a new service block.
+- The new module needs an env var injected at container start.
+- The new module changes the Node version requirement beyond the base image.
+- An nginx route/proxy entry is needed for the new module.
+
+In those cases: **ask the user explicitly**, describe the exact file + diff you intend to make, and only proceed after they say yes. Never silently modify infra files.
 
 ## 3. Hard rules
 

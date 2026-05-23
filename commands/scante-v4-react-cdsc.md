@@ -35,7 +35,9 @@ In both cases:
    - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root (docker-compose serves on `scante-dev.local`).
    - **Case B (outside repo)** — `cd <moduleName> && npm start`.
 
-**Do NOT edit Docker / compose / nginx / `run-app.sh`.** The repo's docker stack is generic — `docker-compose.yml` uses `${PROJECT_PATH}` from `run-app.sh` to mount the new module's directory. No per-module docker changes are ever needed. If `npm install` fails inside the container, fix the module's `package.json`, not the docker files.
+**Docker / compose / nginx / `run-app.sh`:** default = leave alone. The repo's docker stack is generic — `docker-compose.yml` uses `${PROJECT_PATH}` from `run-app.sh` to mount the new module's directory. No per-module docker changes are typically needed. If `npm install` fails inside the container, fix the module's `package.json` first.
+
+**Exception — you MAY propose docker edits** if the new module genuinely requires it (custom port, extra service, env var, nginx route, etc.). In that case: ask the user, show the exact file + diff you want to apply, and only proceed on explicit approval. Never silently modify infra files.
 
 **Step 3 — Ask any clarifying question rather than guessing.**
 The spec is authoritative; if it conflicts with anything else in your context, the spec wins.
