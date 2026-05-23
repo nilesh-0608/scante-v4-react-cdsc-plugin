@@ -63,7 +63,17 @@ Summary of what you must do (the spec is authoritative — defer to it on any co
    - Centered `Spin` (size large, `tip="Loading SDK data..."`) while loading
    - Antd `Result` (status="error") on error with retry button
 8. **Build + verify**: `cd` into the new module, run `npm install && npm run build`. On failure, fix and re-run; do not stop on first error.
-9. **Report**: list created files (paths relative to cwd), confirm build succeeded, give the user `cd <module> && npm start` instructions.
+9. **Report + how to run**:
+   - List created files (paths relative to cwd) and confirm build succeeded.
+   - **Inside the repo (Case A)** — instruct the user to run the module via the repo's helper script from the repo root:
+     ```bash
+     ./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>
+     ```
+     This spins up the React dev container via `docker compose up` and serves it on `scante-dev.local`. Do **not** instruct `npm start` in this case.
+   - **Outside the repo (Case B)** — instruct the user to run locally with:
+     ```bash
+     cd <moduleName> && npm start
+     ```
 
 ## 3. Hard rules
 

@@ -31,7 +31,9 @@ In both cases:
 5. Apply the mandatory styling stack on every screen: **Antd v5 + `@ant-design/icons` + Tailwind CSS** — no raw `<div>` where Antd has an equivalent, no inline styles, no missing icons.
 6. If `screenSpec` is empty, render the §6a default screen (getUserData / getHeaders panels with Avatar, Descriptions, Tags, icons, Spin loader, Result error state).
 7. Run `npm install && npm run build` inside the new module. Fix and re-run on failure; do not stop on first error.
-8. Report back: list of created files, build status, and `npm start` instructions.
+8. Report back: list of created files, build status, and **how to run**:
+   - **Case A (inside repo)** — `./run-app.sh react-mw1/cdsc/<tenant>/<moduleName>` from the repo root (docker-compose serves on `scante-dev.local`).
+   - **Case B (outside repo)** — `cd <moduleName> && npm start`.
 
 **Step 3 — Ask any clarifying question rather than guessing.**
 The spec is authoritative; if it conflicts with anything else in your context, the spec wins.
