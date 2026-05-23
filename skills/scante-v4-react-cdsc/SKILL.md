@@ -30,17 +30,25 @@ The spec is **self-contained** — the user does not need to be inside any speci
 
 Summary of what you must do (the spec is authoritative — defer to it on any conflict):
 
-1. **Detect context** — is the cwd the scantestage.bitbucket.io repo (has `react-mw1/cdsc/` + `docusaurus.config.js`)?
-   - Inside: target path is `react-mw1/cdsc/<tenant>/<moduleName>/`
-   - Outside: target path is `./<moduleName>/` (standalone), still generates the full folder/files from Appendix A
-2. **Ask the user** (one grouped message) for:
+1. **Detect context FIRST — before asking anything.** Check whether the current working directory is the Scante v4 React CDSC repo. It is if **all** of these are true:
+   - `react-mw1/cdsc/` directory exists at the cwd root
+   - `docusaurus.config.js` exists at the cwd root
+   - `git remote -v` contains `scante-prod.bitbucket.io`
+
+2. **Branch on the detection result:**
+
+   **Case A — Inside the repo (all checks pass): ASK the full questionnaire.**
+   Tenant matters here because the module lives under `react-mw1/cdsc/<tenant>/<moduleName>/`. Ask the user (one grouped message) for:
    - `tenant` (required) — e.g. `gfs`, `power-telematics`, `reladyne`, `rtl`, `thermal`, `default`, or new
    - `moduleName` (required, kebab-case)
    - `description` (required, 1–2 sentences)
    - `screenSpec` (optional — blank uses §6a default)
    - `sdkCalls` (optional — default `init`, `setIframeHeight`, `getUserData`, `getHeaders`)
    - `iframeHeight` (optional — default `1000`)
-3. **Confirm** resolved inputs + target path. Wait for "go ahead" before writing anything.
+   Then **confirm** resolved inputs + target path `react-mw1/cdsc/<tenant>/<moduleName>/` and wait for explicit "go ahead" before writing anything.
+
+   **Case B — Outside the repo (any check fails): proceed with minimal prompts and just scaffold.**
+   There is no tenant or enforced folder structure here. Ask only the bare minimum (`moduleName` — required, kebab-case; `screenSpec` — optional) and **immediately proceed** to scaffold at `./<moduleName>/` in the current cwd using Appendix A templates with sensible defaults. Don't block on confirmation — just announce the target path and start generating. If `moduleName` is also missing, ask only for that.
 4. **Refuse on collision** — stop if the target dir already exists; ask the user.
 5. **Generate every file** from Appendix A, substituting placeholders `{{tenant}}`, `{{moduleName}}`, `{{PascalModuleName}}`, `{{iframeHeight}}`.
 6. **Mandatory styling on every screen** (the spec is hard-blocking on this):

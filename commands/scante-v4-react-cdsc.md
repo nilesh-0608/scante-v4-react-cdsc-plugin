@@ -12,18 +12,26 @@ Fetch and read the full, current spec from:
 
 This document is the single source of truth. It contains the agent entrypoint, pre-flight checks, input contract, folder layout, default screen design (getUserData + getHeaders with Antd + Tailwind + Icons), conventions, and Appendix A with verbatim file templates for every required file. The spec is fully self-contained — no other repo access is required.
 
-**Step 2 — Follow the spec's "Agent entrypoint" section verbatim.**
-That section instructs you to:
+**Step 2 — Detect context FIRST, then branch on behaviour.**
 
-1. Run the §0 pre-flight detection (are we inside the scantestage.bitbucket.io repo, or standalone?) and pick the target path accordingly.
-2. Ask the user for: `tenant`, `moduleName`, `description`, optional `screenSpec`, optional `sdkCalls`, optional `iframeHeight`.
-3. Confirm the resolved inputs + target path with the user. Wait for explicit approval before writing files.
-4. Refuse to overwrite an existing target directory without confirmation.
-5. Generate the complete folder structure and every file using Appendix A's inlined templates (substituting `{{tenant}}`, `{{moduleName}}`, `{{PascalModuleName}}`, `{{iframeHeight}}`).
-6. Apply the mandatory styling stack on every screen: **Antd v5 components + `@ant-design/icons` + Tailwind CSS utility classes** — no raw `<div>` where Antd has an equivalent, no inline styles, no missing icons.
-7. If `screenSpec` is empty, render the §6a default screen (getUserData / getHeaders panels with Avatar, Descriptions, Tags, icons, Spin loader, Result error state).
-8. Run `npm install && npm run build` inside the new module. Fix and re-run on failure; do not stop on first error.
-9. Report back: list of created files, build status, and `npm start` instructions.
+Run the §0 pre-flight checks. The cwd is the Scante v4 React CDSC repo only if **all** of these are true:
+
+- `react-mw1/cdsc/` exists at root
+- `docusaurus.config.js` exists at root
+- `git remote -v` contains `scante-prod.bitbucket.io`
+
+**Case A — Inside the repo:** ask the **full questionnaire** — `tenant`, `moduleName`, `description`, optional `screenSpec`, optional `sdkCalls`, optional `iframeHeight`. Confirm resolved inputs + target path `react-mw1/cdsc/<tenant>/<moduleName>/`. Wait for explicit "go ahead" before writing files.
+
+**Case B — Outside the repo:** no tenant required, no enforced folder structure. Ask only for `moduleName` (required, kebab-case) and optional `screenSpec`. Announce target path `./<moduleName>/`, then **proceed immediately** — do not block on confirmation. Use Appendix A defaults for everything else.
+
+In both cases:
+
+3. Refuse to overwrite an existing target directory.
+4. Generate the complete folder structure and every file using Appendix A's inlined templates (substituting `{{tenant}}`, `{{moduleName}}`, `{{PascalModuleName}}`, `{{iframeHeight}}`). Outside the repo, omit tenant-specific files (e.g., `<tenant>Constants.ts` becomes a generic `appConstants.ts`).
+5. Apply the mandatory styling stack on every screen: **Antd v5 + `@ant-design/icons` + Tailwind CSS** — no raw `<div>` where Antd has an equivalent, no inline styles, no missing icons.
+6. If `screenSpec` is empty, render the §6a default screen (getUserData / getHeaders panels with Avatar, Descriptions, Tags, icons, Spin loader, Result error state).
+7. Run `npm install && npm run build` inside the new module. Fix and re-run on failure; do not stop on first error.
+8. Report back: list of created files, build status, and `npm start` instructions.
 
 **Step 3 — Ask any clarifying question rather than guessing.**
 The spec is authoritative; if it conflicts with anything else in your context, the spec wins.
