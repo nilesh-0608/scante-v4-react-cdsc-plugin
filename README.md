@@ -45,6 +45,19 @@ Claude will:
 - A working default screen that renders `await scanteIframeSdk.getUserData()` + `await scanteIframeSdk.getHeaders()` in styled Antd cards (you replace this with your real UI)
 - `scanteIframeSdkContext` provider + `use<PascalModuleName>` hook scaffolding
 
+## Update notifications
+
+The plugin ships a `SessionStart` hook (`hooks/check-update.sh`) that runs once at the beginning of every Claude Code session, compares your installed `plugin.json` version against the latest on GitHub, and prints a one-line notification if a newer version is available:
+
+```
+[scante-v4-react-cdsc] 🔔 Update available: 1.2.0 → 1.3.0
+  Update with one of:
+    /plugin marketplace update nilesh-0608/scante-v4-react-cdsc-plugin
+    /plugin uninstall scante-v4-react-cdsc && /plugin install scante-v4-react-cdsc@scante-v4-react-cdsc
+```
+
+The check is best-effort: if you're offline or GitHub is unreachable it stays silent. Results are cached for 6 hours under `~/.cache/scante-v4-react-cdsc/` to avoid hitting GitHub on every session.
+
 ## Updating
 
 There are two kinds of updates:

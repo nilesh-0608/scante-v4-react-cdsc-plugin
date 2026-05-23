@@ -13,7 +13,7 @@
         "repo": "nilesh-0608/scante-v4-react-cdsc-plugin"
       },
       "description": "Scaffold a new Scante v4 React CDSC module (CRA + TypeScript + Antd v5 + Tailwind + @ant-design/icons) wired to window.scanteIframeSdk. Self-contained.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "keywords": ["scante", "react", "cdsc", "scaffolding", "antd", "tailwind"]
     }
   ]
